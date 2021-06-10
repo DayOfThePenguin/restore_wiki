@@ -1,0 +1,28 @@
+version: "3"
+
+# name for volume to store the data throughout the file.
+# volumes:
+#     maria-data:
+
+services:
+    database:
+        container_name: mariawikipedia
+        image: mariadb
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=maria
+            - MYSQL_ROOT_PASSWORD=maria
+        volumes:
+            - type: bind
+              source: ./
+              target: /home/user
+            # volumes:
+            # - maria-data:/var/lib/mariadb/data
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
